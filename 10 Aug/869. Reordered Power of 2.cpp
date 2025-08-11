@@ -1,3 +1,6 @@
+#include<iostream>
+#include<string>
+
 class Solution {
 public:
     // bool isPowerOfTwo(int n) {
