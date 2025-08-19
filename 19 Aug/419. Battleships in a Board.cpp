@@ -3,7 +3,6 @@ using namespace std;
 
 Solution {
 public:
-    /* ----- 1 ------*/
     void dfs(int r, int c, vector<vector<char>>& board, vector<vector<int>>& vis){
       if(r<0 ||c < 0 || r>=n || c>= m) return;
       if(vis[r][c] || board[r][c] != 'X') return;
@@ -33,9 +32,6 @@ public:
 
       return ships;
     }
-
-    
-
 };
 
 
