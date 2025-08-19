@@ -18,7 +18,7 @@ Each folder contains:
 
 | Platform     | Solved |
 |--------------|--------|
-| LeetCode     | 320+   |
+| LeetCode     | 360+   |
 | GFG          | 110+   |
 | HackerRank   | 50+   |
 
