@@ -51,52 +51,76 @@ public:
     // }
 
     /* ------- 2 ------- */
-    int fun(vector<vector<int>>& matrix, int side) {
-        int m = matrix.size();
-        int n = matrix[0].size();
-        int count = 0;
+    // int fun(vector<vector<int>>& matrix, int side) {
+    //     int m = matrix.size();
+    //     int n = matrix[0].size();
+    //     int count = 0;
 
-        // We can only start at (i,j) where submatrix of size 'side' fits
-        for (int i = 0; i + side - 1 < m; i++) {
-            for (int j = 0; j + side - 1 < n; j++) {
-                bool allOnes = true;
+    //     // We can only start at (i,j) where submatrix of size 'side' fits
+    //     for (int i = 0; i + side - 1 < m; i++) {
+    //         for (int j = 0; j + side - 1 < n; j++) {
+    //             bool allOnes = true;
 
-                // Check this submatrix
-                for (int x = i; x < i + side; x++) {
-                    for (int y = j; y < j + side; y++) {
-                        if (matrix[x][y] == 0) {
-                            allOnes = false;
-                            break;
-                        }
-                    }
-                    if (!allOnes) break;
-                }
+    //             // Check this submatrix
+    //             for (int x = i; x < i + side; x++) {
+    //                 for (int y = j; y < j + side; y++) {
+    //                     if (matrix[x][y] == 0) {
+    //                         allOnes = false;
+    //                         break;
+    //                     }
+    //                 }
+    //                 if (!allOnes) break;
+    //             }
 
-                if (allOnes) count++;
-            }
-        }
-        return count;
-    }
+    //             if (allOnes) count++;
+    //         }
+    //     }
+    //     return count;
+    // }
 
+    // int countSquares(vector<vector<int>>& matrix) {
+    //     int m = matrix.size();
+    //     int n = matrix[0].size();
+    //     int squares = 0;
+
+    //     // Count 1x1 squares
+    //     for (int i = 0; i < m; i++) {
+    //         for (int j = 0; j < n; j++) {
+    //             if (matrix[i][j] == 1) squares++;
+    //         }
+    //     }
+
+    //     int mini = min(m, n);
+
+    //     // Count larger squares
+    //     for (int side = 2; side <= mini; side++) {
+    //         squares += fun(matrix, side);
+    //     }
+
+    //     return squares;
+    // }
+
+    /* ------- 3 --------------*/
     int countSquares(vector<vector<int>>& matrix) {
         int m = matrix.size();
         int n = matrix[0].size();
-        int squares = 0;
-
-        // Count 1x1 squares
+        
+        vector<vector<int>> dp(m, vector<int>(n, 0));
+        int totalSquares = 0;
+        
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (matrix[i][j] == 1) squares++;
+                if (matrix[i][j] == 1) {
+                    if (i == 0 || j == 0) {
+                        dp[i][j] = 1;
+                    } else {
+                        dp[i][j] = min({dp[i-1][j], dp[i][j-1], dp[i-1][j-1]}) + 1;
+                    }
+                    totalSquares += dp[i][j];
+                }
             }
         }
-
-        int mini = min(m, n);
-
-        // Count larger squares
-        for (int side = 2; side <= mini; side++) {
-            squares += fun(matrix, side);
-        }
-
-        return squares;
+        
+        return totalSquares;
     }
 };
